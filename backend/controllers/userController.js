@@ -1,6 +1,7 @@
 const express = require('express');
 const asyncHandler = require('express-async-handler');
 const User = require('../models/userModel.js');
+const generateToken = require('../utils/generateToken')
 
 // @desc Auth user & get token
 
@@ -15,9 +16,16 @@ const authUser = asyncHandler(async(req, res)=> {
             name: user.name,
             email: user.email,
             isAdmin: user.isAdmin,
-            token: null
+            token: generateToken(user._id)
         }) 
-    }
+    } else {
+        res.status(401)
+        throw new Error('Invalid email or password');
+    } 
 })
 
-module.exports = { authUser};
+const getUserProfile = asyncHandler(async (req, res) => {
+    res.send('Success');
+})
+
+module.exports = { authUser, getUserProfile };

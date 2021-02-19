@@ -9,7 +9,7 @@ import { listProductDetails } from '../actions/productActions';
 import { addToCart }  from '../actions/cartActions';
 
 const ProductScreen = ({ history, match }) => {
-  const [qty, setQty] = useState(0);
+  const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const productDetails = useSelector(state => state.productDetails );
   const { product, error, loading } = productDetails;
@@ -88,7 +88,7 @@ const ProductScreen = ({ history, match }) => {
                     }>
                       {
                       [...Array(product.countInStock).keys()].map((x) => (
-                        <option key={x + 1} value={x + 1}>
+                        <option key={x + 1} value={x > 1 ? x + 1 : 1}>
                           {x + 1}
                         </option>
                       )) }
