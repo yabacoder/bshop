@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Row, Col, ListGroup, Image, Card } from 'react-bootstrap';
+import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import Loader from '../components/Loader';
 import { getOrderDetails } from '../actions/orderActions';
 
-const PlaceOrderScreen = ({ history }) => {
+const PlaceOrderScreen = ({ match }) => {
 	const orderId = match.params.id;
 
 	const dispatch = useDispatch();
@@ -14,6 +15,7 @@ const PlaceOrderScreen = ({ history }) => {
 	const { order, loading, error } = orderDetails;
 
 	useEffect(() => {
+		//console.log(`order ID ${orderId}`)
 		dispatch(getOrderDetails(orderId));
 	}, []);
 
@@ -93,8 +95,6 @@ const PlaceOrderScreen = ({ history }) => {
 								<Col>Total</Col>
 								<Col>${order.totalPrice}</Col>
 							</Row>
-						</ListGroup.Item>
-					
 						</ListGroup.Item>
 					</ListGroup>
 				</Card>
