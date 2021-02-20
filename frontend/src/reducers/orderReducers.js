@@ -42,7 +42,6 @@ export const orderDetailsReducer = (
 		case ORDER_DETAILS_SUCCESS:
 			return {
 				loading: false,
-
 				order: action.payload,
 			};
 		case ORDER_DETAILS_FAIL:
@@ -51,6 +50,6 @@ export const orderDetailsReducer = (
 				error: action.payload,
 			};
 		default:
-			return { state };
+			return state;
 	}
 };
